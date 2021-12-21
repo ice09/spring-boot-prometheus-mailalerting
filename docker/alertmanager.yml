@@ -1,0 +1,12 @@
+route:
+  receiver: emailer
+receivers:
+  - name: emailer
+    email_configs:
+      - to: RECEIVER_MAIL_ADDRESS
+        send_resolved: true
+        from:  SENDER_MAIL_ADDRESS
+        smarthost: smtp.gmail.com:587
+        auth_username: SENDER_MAIL_ADDRESS
+        auth_identity: SENDER_MAIL_ADDRESS
+        auth_password: GOOGLE_APP_PASSWORD

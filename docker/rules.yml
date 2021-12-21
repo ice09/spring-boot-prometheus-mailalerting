@@ -1,0 +1,10 @@
+groups:
+  - name: example
+    rules:
+      - alert: LogErrorRate
+        expr: rate(logback_events_total{level="error"}[1m])>0
+        for: 1m
+        labels:
+          severity: high
+        annotations:
+          summary: "Application is not healthy"
