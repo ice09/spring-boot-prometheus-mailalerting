@@ -18,6 +18,7 @@ public class SelfCallingScheduler {
         try {
             Unirest.get("http://localhost:8080/checkHealth").asString().getBody();
         } catch (Exception ex) {
+            log.error("Error on external Service call: " + ex.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error on INTERNAL Service call", ex);
         }
     }
