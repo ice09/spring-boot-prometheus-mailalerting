@@ -16,7 +16,10 @@ public class SelfCallingScheduler {
     public void callServiceHealthCheckDelegate() throws UnirestException {
         log.info(System.currentTimeMillis() + ": calling external service health check.");
         try {
-            Unirest.get("http://localhost:8080/checkHealth").asString().getBody();
+            int status = Unirest.get("http://localhost:8080/checkHealth").asString().getStatus();
+            if (status != 200) {
+                throw new IllegalStateException("HTTP Status is not 200.");
+            }
         } catch (Exception ex) {
             log.error("Error on external Service call: " + ex.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error on INTERNAL Service call", ex);
